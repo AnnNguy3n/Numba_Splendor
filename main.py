@@ -3,7 +3,6 @@ import random as rd
 from time import time
 
 from Agents.Agent_Random.Agent_Random import Agent_Random as p1
-from Agents.Agent_khon_loi.Agent_khon_loi import Agent_khon_loi as p2
 
 def one_game(list_player, env, lv1, lv2, lv3, print_mode):
     reset(env, lv1, lv2, lv3)
@@ -85,9 +84,9 @@ def n_games(list_player, num_games=1, print_mode=False):
 
 if __name__ == '__main__':
     a = time()
-    print(n_games([p2,p1,p1,p1], print_mode=True))
+    print(n_games([p1,p1,p1,p1], print_mode=True))
     print(time() - a)
 
     a = time()
-    print(n_games([p2,p1,p1,p1], 1000))
+    print(n_games([p1,p1,p1,p1], 1000))
     print(time() - a)

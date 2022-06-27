@@ -8,7 +8,7 @@ from Agents.Agent_khon_loi.Agent_khon_loi import Agent_khon_loi as p2
 def one_game(list_player, env, lv1, lv2, lv3, print_mode):
     reset(env, lv1, lv2, lv3)
 
-    if print_mode:
+    def _print_():
         print('----------------------------------------------------------------------------------------------------')
         print('Thẻ 1:', [i_ for i_ in range(40) if env[:40][i_] == 5])
         print('Thẻ 2:', [i_ for i_ in range(40,70) if env[:70][i_] == 5])
@@ -19,21 +19,16 @@ def one_game(list_player, env, lv1, lv2, lv3, print_mode):
         print('P3:', env[130:142], 'P4:', env[142:154])
         print(env[154:])
 
+    if print_mode:
+        _print_()
+
     _cc = 0
-    while env[154] <= 400 or _cc <= 10000:
+    while env[154] <= 400 and _cc <= 10000:
         act = list_player[env[154]%4](get_player_state(env))
         step(act, env, lv1, lv2, lv3)
         if print_mode:
-            print('----------------------------------------------------------------------------------------------------')
             print('Action chọn', act)
-            print('Thẻ 1:', [i_ for i_ in range(40) if env[:40][i_] == 5])
-            print('Thẻ 2:', [i_ for i_ in range(40,70) if env[:70][i_] == 5])
-            print('Thẻ 3:', [i_ for i_ in range(70,90) if env[:90][i_] == 5])
-            print('Thẻ noble:', [i_ for i_ in range(90,100) if env[:100][i_] == 5])
-            print('B_stocks:', env[100:106])
-            print('P1:', env[106:118], 'P2:', env[118:130])
-            print('P3:', env[130:142], 'P4:', env[142:154])
-            print(env[154:])
+            _print_()
 
         if close_game(env) != 0:
             break
@@ -42,7 +37,7 @@ def one_game(list_player, env, lv1, lv2, lv3, print_mode):
     
     if _cc >= 10000:
         print('Chỗ này bị lặp vô tận')
-        print(env, lv1, lv2, lv3)
+        _print_()
         input()
 
     turns = env[154]
@@ -65,7 +60,7 @@ def n_games(list_player, num_games=1, print_mode=False):
         return [-1]
     
     env, lv1, lv2, lv3 = generate_environment()
-    num_won = [0,0,0,0]
+    num_won = [0,0,0,0,0]
     p_lst_idx = [0,1,2,3]
     for _n in range(num_games):
         # Shuffle người chơi
@@ -81,7 +76,10 @@ def n_games(list_player, num_games=1, print_mode=False):
             list_player[p_lst_idx[3]],
         ], env, lv1, lv2, lv3, print_mode)
 
-        num_won[p_lst_idx[winner-1]] += 1
+        if winner != 0:
+            num_won[p_lst_idx[winner-1]] += 1
+        else:
+            num_won[4] += 1
 
     return num_won
 

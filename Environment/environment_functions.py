@@ -263,7 +263,8 @@ def close_game(e_state):
             for p_id in lst_p:
                 lst_p_c.append(np.count_nonzero(e_state[:90]==p_id))
             
-            min_p_c = np.min(np.array(lst_p_c))
+            lst_p_c = np.array(lst_p_c)
+            min_p_c = np.min(lst_p_c)
             p_win = np.where(lst_p_c==min_p_c)[0][0]
             return lst_p[p_win]
     else:
@@ -444,7 +445,8 @@ def check_victory(p_state):
             for p_id in lst_p:
                 lst_p_c.append(np.count_nonzero(p_state[:90]==p_id))
             
-            min_p_c = np.min(np.array(lst_p_c))
+            lst_p_c = np.array(lst_p_c)
+            min_p_c = np.min(lst_p_c)
             p_win = np.where(lst_p_c==min_p_c)[0][0]
             if lst_p[p_win] == 1:
                 return 1

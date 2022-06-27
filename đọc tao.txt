@@ -1,0 +1,23 @@
+Pha 0:
+    - 1: Chọn hành động lấy nguyên liệu
+    - 2: Chọn hành động úp thẻ
+    - 3: Chọn hành động mua thẻ
+    - 0: Chọn hành động bỏ qua lượt
+Pha 1: Lấy nguyên liệu
+    - 4: Chọn lấy red
+    - 5: Chọn lấy blue
+    - 6: Chọn lấy green
+    - 7: Chọn lấy black
+    - 8: Chọn lấy white
+Pha 2: Úp thẻ
+    - 9 -> 98: Úp thẻ có id lần lượt từ 0 (ứng với 9) đến 89 (ứng với 98)
+    - 99, 100, 101: Úp thể ẩn có cấp lần lượt là cấp 1, cấp 2, cấp 3
+Pha 3: Mua thẻ
+    - 102 -> 191: Mua thẻ có id lần lượt từ 0 (ứng với 102) đến 89 (ứng với 191)
+Pha 4: Trả nguyên liệu
+    - 192: Chọn trả red
+    - 193: Chọn trả blue
+    - 194: Chọn trả green
+    - 195: Chọn trả black
+    - 196: Chọn trả white
+    - 197: Chọn trả yellow

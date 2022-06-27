@@ -40,7 +40,7 @@ def one_game(list_player, env, lv1, lv2, lv3, print_mode):
 
         _cc += 1
     
-    if _cc == 10000:
+    if _cc >= 10000:
         print('Chỗ này bị lặp vô tận')
         print(env, lv1, lv2, lv3)
         input()

@@ -296,23 +296,26 @@ def step(action, e_state, lv1, lv2, lv3):
                 e_state[155:160] = np.array([0,0,0,0,0]) # Nguyên liệu đã lấy
         
         elif phase == 1: # Pha lấy nguyên liệu, nguyên liệu = action - 4
-            st_ = action - 4
-            taken = e_state[155:160]
-            taken[st_] += 1 # Thêm vào nguyên liệu đã lấy
-            cur_p[:5][st_] += 1 # Thêm nguyên liệu cho người chơi hiện tại
-            b_stocks[:5][st_] -= 1 # Trừ nguyên liệu ở bàn chơi
-            # Tính toán xem pha lấy nguyên liệu còn tiếp tục hay không
-            # Chuyển sang pha trả nguyên liệu hoặc sang turn mới
             check_phase1 = False
-            s_taken = np.sum(taken)
-            if s_taken == 1: # Chỉ còn đúng loại nl vừa lấy nhưng sl < 3
-                if b_stocks[:5][st_] < 3 and (np.sum(b_stocks[:5]) - b_stocks[:5][st_]) == 0:
-                    check_phase1 = True
-            elif s_taken == 2: # Lấy double, hoặc không còn nl nào khác 2 cái vừa lấy
-                if np.max(taken) == 2 or (np.sum(b_stocks[:5]) - np.sum(b_stocks[:5][np.where(taken>0)[0]])) == 0:
-                    check_phase1 = True
-            else: # sum(taken) = 3
+            if action == 0:
                 check_phase1 = True
+            else:
+                st_ = action - 4
+                taken = e_state[155:160]
+                taken[st_] += 1 # Thêm vào nguyên liệu đã lấy
+                cur_p[:5][st_] += 1 # Thêm nguyên liệu cho người chơi hiện tại
+                b_stocks[:5][st_] -= 1 # Trừ nguyên liệu ở bàn chơi
+                # Tính toán xem pha lấy nguyên liệu còn tiếp tục hay không
+                # Chuyển sang pha trả nguyên liệu hoặc sang turn mới
+                s_taken = np.sum(taken)
+                if s_taken == 1: # Chỉ còn đúng loại nl vừa lấy nhưng sl < 3
+                    if b_stocks[:5][st_] < 3 and (np.sum(b_stocks[:5]) - b_stocks[:5][st_]) == 0:
+                        check_phase1 = True
+                elif s_taken == 2: # Lấy double, hoặc không còn nl nào khác 2 cái vừa lấy
+                    if np.max(taken) == 2 or (np.sum(b_stocks[:5]) - np.sum(b_stocks[:5][np.where(taken>0)[0]])) == 0:
+                        check_phase1 = True
+                else: # sum(taken) = 3
+                    check_phase1 = True
 
             if check_phase1:
                 if np.sum(cur_p[:6]) > 10:

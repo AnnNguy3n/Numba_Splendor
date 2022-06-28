@@ -4,7 +4,7 @@ from time import time
 
 from Agents.Agent_Random.Agent_Random import Agent_Random as p1
 
-def one_game(list_player, env, lv1, lv2, lv3, print_mode):
+def one_game(list_player, env, lv1, lv2, lv3, print_mode, pernament_file):
     reset(env, lv1, lv2, lv3)
 
     def _print_():
@@ -16,9 +16,11 @@ def one_game(list_player, env, lv1, lv2, lv3, print_mode):
     if print_mode:
         _print_()
 
+    temp_file = [[],[],[],[]]
     _cc = 0
     while env[154] <= 400 and _cc <= 10000:
-        act = list_player[env[154]%4](get_player_state(env))
+        p_idx = env[154]%4
+        act, temp_file[p_idx], pernament_file = list_player[p_idx](get_player_state(env), temp_file[p_idx], pernament_file)
         step(act, env, lv1, lv2, lv3)
         if print_mode:
             if act == 0:
@@ -53,12 +55,12 @@ def one_game(list_player, env, lv1, lv2, lv3, print_mode):
         env[154] = i
         p_state = get_player_state(env)
         p_state[154] = turns
-        act = list_player[env[154]%4](p_state)
+        act, temp_file[i], pernament_file = list_player[env[154]%4](p_state, temp_file[i], pernament_file)
     
     env[154] = turns
-    return close_game(env)
+    return close_game(env), pernament_file
 
-def n_games(list_player, num_games=1, print_mode=False):
+def n_games(list_player, num_games=1, print_mode=False, pernament_file = []):
     '''
     Chạy nhiều game thì tắt cái print_mode đi không lag máy
     Nếu bật print_mode thì nên chạy ở jupyter notebook để xem full output
@@ -77,8 +79,8 @@ def n_games(list_player, num_games=1, print_mode=False):
             print('Thứ tự người chơi (thứ tự này sẽ ứng với P1,P2,P3,P4):', p_lst_idx)
             print('Lưu ý: không phải người chơi index 0 là P1')
 
-        winner = one_game(
-            [list_player[p_lst_idx[0]], list_player[p_lst_idx[1]], list_player[p_lst_idx[2]], list_player[p_lst_idx[3]]], env, lv1, lv2, lv3, print_mode
+        winner, pernament_file = one_game(
+            [list_player[p_lst_idx[0]], list_player[p_lst_idx[1]], list_player[p_lst_idx[2]], list_player[p_lst_idx[3]]], env, lv1, lv2, lv3, print_mode, pernament_file
         )
 
         if winner != 0:
@@ -86,13 +88,13 @@ def n_games(list_player, num_games=1, print_mode=False):
         else:
             num_won[4] += 1
 
-    return num_won
+    return num_won, pernament_file
 
 if __name__ == '__main__':
     a = time()
-    print(n_games([p1,p1,p1,p1], print_mode=True))
+    print(n_games(list_player=[p1,p1,p1,p1], num_games=1, print_mode=True, pernament_file=[])[0])
     print(time() - a)
 
     a = time()
-    print(n_games([p1,p1,p1,p1], 1000))
+    print(n_games(list_player=[p1,p1,p1,p1], num_games=1000, print_mode=False, pernament_file=[])[0])
     print(time() - a)

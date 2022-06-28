@@ -1,0 +1,20 @@
+Hàm n_games có 4 tham số:
+    + list_player (phải tự truyền vào)
+    + num_games (mặc định: 1)
+    + print_mode (mặc định: False tức là không in gì, chỉnh thành True sẽ in ra thông tin chi tiết bàn chơi sau mỗi action)
+    + pernament_file (mặc định: [])
+
+Hàm n_games trả ra tuple (a,b), trong đó:
+    + a là array đếm số lần chiến thắng của mỗi agent xếp theo thứ tự truyền vào list_player
+    riêng phần tử cuối của a là số ván đấu không có người chiến thắng (bị kẹt, hoặc chơi quá 100 turn mỗi người)
+    + b là pernament_file
+
+!!! Lưu ý khi viết Agent:
+    + Luôn có dòng lệnh sau:
+        "from Agents.agent_functions import *" : Dòng lệnh này giúp Agent lấy được những function mà agent được phép dùng
+        Cụ thể những function này là:
+            + get_list_action
+            + check_victory
+            + amount_action (hoặc amount_action_space, dùng 1 trong 2)
+        
+        Ngoài ra Agent không được phép import thêm bất cứ hàm nào ở environment_function

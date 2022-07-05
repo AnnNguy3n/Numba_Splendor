@@ -1,4 +1,4 @@
-from Environment.environment_functions import *
+from Environment.env_func import *
 import random as rd
 from time import time
 
@@ -48,14 +48,14 @@ def one_game(list_player, env, lv1, lv2, lv3, print_mode, pernament_file):
         _print_()
         input()
 
-    turns = env[154]
+    turn = env[154]
     for i in range(4):
         env[154] = i
         p_state = get_player_state(env)
-        p_state[154] = turns
+        p_state[154] = 1
         act, temp_file[i], pernament_file = list_player[env[154]%4](p_state, temp_file[i], pernament_file)
     
-    env[154] = turns
+    env[154] = turn
     return close_game(env), pernament_file
 
 def n_games(list_player, num_games=1, print_mode=False, pernament_file = []):
@@ -90,9 +90,9 @@ def n_games(list_player, num_games=1, print_mode=False, pernament_file = []):
 
 if __name__ == '__main__':
     from Agents.Agent_Random.agent import action as p1
-    
+
     a = time()
-    print(n_games(list_player=[p1,p1,p1,p1], num_games=1, print_mode=True, pernament_file=[])[0])
+    print(n_games(list_player=[p1,p1,p1,p1], num_games=1, print_mode=False, pernament_file=[])[0])
     print(time() - a)
 
     a = time()

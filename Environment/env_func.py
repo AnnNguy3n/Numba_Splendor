@@ -1,120 +1,9 @@
 import numpy as np
 from numba import njit
 
-# @njit
-def get_normal_cards_infor():
-    return np.array(
-        [[0, 2, 2, 2, 0, 0, 0],
-        [0, 2, 3, 0, 0, 0, 0],
-        [0, 2, 1, 1, 0, 2, 1],
-        [0, 2, 0, 1, 0, 0, 2],
-        [0, 2, 0, 3, 1, 0, 1],
-        [0, 2, 1, 1, 0, 1, 1],
-        [1, 2, 0, 0, 0, 4, 0],
-        [0, 2, 2, 1, 0, 2, 0],
-        [0, 1, 2, 0, 2, 0, 1],
-        [0, 1, 0, 0, 2, 2, 0],
-        [0, 1, 1, 0, 1, 1, 1],
-        [0, 1, 2, 0, 1, 1, 1],
-        [0, 1, 1, 1, 3, 0, 0],
-        [0, 1, 0, 0, 0, 2, 1],
-        [0, 1, 0, 0, 0, 3, 0],
-        [1, 1, 4, 0, 0, 0, 0],
-        [1, 0, 0, 0, 0, 0, 4],
-        [0, 0, 0, 0, 0, 0, 3],
-        [0, 0, 0, 1, 1, 1, 2],
-        [0, 0, 0, 0, 1, 2, 2],
-        [0, 0, 1, 0, 0, 3, 1],
-        [0, 0, 2, 0, 0, 0, 2],
-        [0, 0, 0, 1, 1, 1, 1],
-        [0, 0, 0, 2, 1, 0, 0],
-        [0, 4, 0, 2, 2, 1, 0],
-        [0, 4, 1, 1, 2, 1, 0],
-        [0, 4, 0, 1, 0, 1, 3],
-        [1, 4, 0, 0, 4, 0, 0],
-        [0, 4, 0, 2, 0, 2, 0],
-        [0, 4, 2, 0, 0, 1, 0],
-        [0, 4, 1, 1, 1, 1, 0],
-        [0, 4, 0, 3, 0, 0, 0],
-        [0, 3, 1, 0, 2, 0, 0],
-        [0, 3, 1, 1, 1, 0, 1],
-        [1, 3, 0, 4, 0, 0, 0],
-        [0, 3, 1, 2, 0, 0, 2],
-        [0, 3, 0, 0, 3, 0, 0],
-        [0, 3, 0, 0, 2, 0, 2],
-        [0, 3, 3, 0, 1, 1, 0],
-        [0, 3, 1, 2, 1, 0, 1],
-        [1, 2, 0, 3, 0, 2, 2],
-        [2, 2, 0, 2, 0, 1, 4],
-        [1, 2, 3, 0, 2, 0, 3],
-        [2, 2, 0, 5, 3, 0, 0],
-        [2, 2, 0, 0, 5, 0, 0],
-        [3, 2, 0, 0, 6, 0, 0],
-        [3, 1, 0, 6, 0, 0, 0],
-        [2, 1, 1, 0, 0, 4, 2],
-        [2, 1, 0, 5, 0, 0, 0],
-        [2, 1, 0, 3, 0, 0, 5],
-        [1, 1, 0, 2, 3, 3, 0],
-        [1, 1, 3, 2, 2, 0, 0],
-        [3, 0, 6, 0, 0, 0, 0],
-        [2, 0, 0, 0, 0, 5, 3],
-        [2, 0, 0, 0, 0, 5, 0],
-        [2, 0, 0, 4, 2, 0, 1],
-        [1, 0, 2, 3, 0, 3, 0],
-        [1, 0, 2, 0, 0, 3, 2],
-        [3, 4, 0, 0, 0, 0, 6],
-        [2, 4, 5, 0, 0, 3, 0],
-        [2, 4, 5, 0, 0, 0, 0],
-        [1, 4, 3, 3, 0, 0, 2],
-        [1, 4, 2, 0, 3, 2, 0],
-        [2, 4, 4, 0, 1, 2, 0],
-        [1, 3, 0, 2, 2, 0, 3],
-        [1, 3, 0, 0, 3, 2, 3],
-        [2, 3, 2, 1, 4, 0, 0],
-        [2, 3, 3, 0, 5, 0, 0],
-        [2, 3, 0, 0, 0, 0, 5],
-        [3, 3, 0, 0, 0, 6, 0],
-        [4, 2, 0, 7, 0, 0, 0],
-        [4, 2, 0, 6, 3, 0, 3],
-        [5, 2, 0, 7, 3, 0, 0],
-        [3, 2, 3, 3, 0, 3, 5],
-        [3, 1, 3, 0, 3, 5, 3],
-        [4, 1, 0, 0, 0, 0, 7],
-        [5, 1, 0, 3, 0, 0, 7],
-        [4, 1, 0, 3, 0, 3, 6],
-        [3, 0, 0, 5, 3, 3, 3],
-        [4, 0, 0, 0, 7, 0, 0],
-        [5, 0, 3, 0, 7, 0, 0],
-        [4, 0, 3, 3, 6, 0, 0],
-        [5, 4, 0, 0, 0, 7, 3],
-        [3, 4, 5, 3, 3, 3, 0],
-        [4, 4, 0, 0, 0, 7, 0],
-        [4, 4, 3, 0, 0, 6, 3],
-        [3, 3, 3, 3, 5, 0, 3],
-        [5, 3, 7, 0, 0, 3, 0],
-        [4, 3, 6, 0, 3, 3, 0],
-        [4, 3, 7, 0, 0, 0, 0]]
-    )
+normal_cards_infor = np.array([[0, 2, 2, 2, 0, 0, 0], [0, 2, 3, 0, 0, 0, 0], [0, 2, 1, 1, 0, 2, 1], [0, 2, 0, 1, 0, 0, 2], [0, 2, 0, 3, 1, 0, 1], [0, 2, 1, 1, 0, 1, 1], [1, 2, 0, 0, 0, 4, 0], [0, 2, 2, 1, 0, 2, 0], [0, 1, 2, 0, 2, 0, 1], [0, 1, 0, 0, 2, 2, 0], [0, 1, 1, 0, 1, 1, 1], [0, 1, 2, 0, 1, 1, 1], [0, 1, 1, 1, 3, 0, 0], [0, 1, 0, 0, 0, 2, 1], [0, 1, 0, 0, 0, 3, 0], [1, 1, 4, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 4], [0, 0, 0, 0, 0, 0, 3], [0, 0, 0, 1, 1, 1, 2], [0, 0, 0, 0, 1, 2, 2], [0, 0, 1, 0, 0, 3, 1], [0, 0, 2, 0, 0, 0, 2], [0, 0, 0, 1, 1, 1, 1], [0, 0, 0, 2, 1, 0, 0], [0, 4, 0, 2, 2, 1, 0], [0, 4, 1, 1, 2, 1, 0], [0, 4, 0, 1, 0, 1, 3], [1, 4, 0, 0, 4, 0, 0], [0, 4, 0, 2, 0, 2, 0], [0, 4, 2, 0, 0, 1, 0], [0, 4, 1, 1, 1, 1, 0], [0, 4, 0, 3, 0, 0, 0], [0, 3, 1, 0, 2, 0, 0], [0, 3, 1, 1, 1, 0, 1], [1, 3, 0, 4, 0, 0, 0], [0, 3, 1, 2, 0, 0, 2], [0, 3, 0, 0, 3, 0, 0], [0, 3, 0, 0, 2, 0, 2], [0, 3, 3, 0, 1, 1, 0], [0, 3, 1, 2, 1, 0, 1], [1, 2, 0, 3, 0, 2, 2], [2, 2, 0, 2, 0, 1, 4], [1, 2, 3, 0, 2, 0, 3], [2, 2, 0, 5, 3, 0, 0], [2, 2, 0, 0, 5, 0, 0], [3, 2, 0, 0, 6, 0, 0], [3, 1, 0, 6, 0, 0, 0], [2, 1, 1, 0, 0, 4, 2], [2, 1, 0, 5, 0, 0, 0], [2, 1, 0, 3, 0, 0, 5], [1, 1, 0, 2, 3, 3, 0], [1, 1, 3, 2, 2, 0, 0], [3, 0, 6, 0, 0, 0, 0], [2, 0, 0, 0, 0, 5, 3], [2, 0, 0, 0, 0, 5, 0], [2, 0, 0, 4, 2, 0, 1], [1, 0, 2, 3, 0, 3, 0], [1, 0, 2, 0, 0, 3, 2], [3, 4, 0, 0, 0, 0, 6], [2, 4, 5, 0, 0, 3, 0], [2, 4, 5, 0, 0, 0, 0], [1, 4, 3, 3, 0, 0, 2], [1, 4, 2, 0, 3, 2, 0], [2, 4, 4, 0, 1, 2, 0], [1, 3, 0, 2, 2, 0, 3], [1, 3, 0, 0, 3, 2, 3], [2, 3, 2, 1, 4, 0, 0], [2, 3, 3, 0, 5, 0, 0], [2, 3, 0, 0, 0, 0, 5], [3, 3, 0, 0, 0, 6, 0], [4, 2, 0, 7, 0, 0, 0], [4, 2, 0, 6, 3, 0, 3], [5, 2, 0, 7, 3, 0, 0], [3, 2, 3, 3, 0, 3, 5], [3, 1, 3, 0, 3, 5, 3], [4, 1, 0, 0, 0, 0, 7], [5, 1, 0, 3, 0, 0, 7], [4, 1, 0, 3, 0, 3, 6], [3, 0, 0, 5, 3, 3, 3], [4, 0, 0, 0, 7, 0, 0], [5, 0, 3, 0, 7, 0, 0], [4, 0, 3, 3, 6, 0, 0], [5, 4, 0, 0, 0, 7, 3], [3, 4, 5, 3, 3, 3, 0], [4, 4, 0, 0, 0, 7, 0], [4, 4, 3, 0, 0, 6, 3], [3, 3, 3, 3, 5, 0, 3], [5, 3, 7, 0, 0, 3, 0], [4, 3, 6, 0, 3, 3, 0], [4, 3, 7, 0, 0, 0, 0]])
+noble_cards_infor = np.array([[0, 4, 4, 0, 0], [3, 0, 3, 3, 0], [3, 3, 3, 0, 0], [3, 0, 0, 3, 3], [0, 3, 0, 3, 3], [4, 0, 4, 0, 0], [4, 0, 0, 4, 0], [0, 3, 3, 0, 3], [0, 4, 0, 0, 4], [0, 0, 0, 4, 4]])
 
-# @njit
-def get_noble_cards_infor():
-    return np.array(
-        [[0, 4, 4, 0, 0],
-        [3, 0, 3, 3, 0],
-        [3, 3, 3, 0, 0],
-        [3, 0, 0, 3, 3],
-        [0, 3, 0, 3, 3],
-        [4, 0, 4, 0, 0],
-        [4, 0, 0, 4, 0],
-        [0, 3, 3, 0, 3],
-        [0, 4, 0, 0, 4],
-        [0, 0, 0, 4, 4]]
-    )
-
-normal_cards_infor = get_normal_cards_infor()
-noble_cards_infor = get_noble_cards_infor()
-
-# @njit
 def generate_environment():
     e_state = np.array(
         [0 for _ in range(100)] # Tình trạng 100 thẻ (90 thẻ thường, 10 thẻ quý tộc): 0.99
@@ -130,25 +19,45 @@ def generate_environment():
 
 @njit
 def reset(e_state, lv1, lv2, lv3):
-    e_state[:100] = 0
+    e_state[:] = 0
     e_state[100:106] = np.array([7,7,7,7,7,5])
-    e_state[106:] = 0
 
     lv1[-1] = 4
     np.random.shuffle(lv1[:-1])
-    e_state[:40][lv1[:4]] = 5
+    e_state[lv1[:4]] = 5
 
     lv2[-1] = 4
     np.random.shuffle(lv2[:-1])
-    e_state[:70][lv2[:4]] = 5
+    e_state[lv2[:4]] = 5
 
     lv3[-1] = 4
     np.random.shuffle(lv3[:-1])
-    e_state[:90][lv3[:4]] = 5
+    e_state[lv3[:4]] = 5
 
     nob = np.arange(90,100)
     np.random.shuffle(nob)
-    e_state[:100][nob[:5]] = 5
+    e_state[nob[:5]] = 5
+
+@njit
+def close_game(e_state):
+    score_arr = e_state[np.array([117,129,141,153])]
+    max_score = np.max(score_arr)
+    if max_score >= 15 and e_state[-1] == 0 and e_state[154] % 4 == 0:
+        lst_p = np.where(score_arr==max_score)[0] + 1
+        if len(lst_p) == 1:
+            return lst_p[0]
+        else:
+            lst_p_c = []
+            lst_p = np.flip(lst_p)
+            for p_id in lst_p:
+                lst_p_c.append(np.count_nonzero(e_state[:90]==p_id))
+            
+            lst_p_c = np.array(lst_p_c)
+            min_p_c = np.min(lst_p_c)
+            p_win = np.where(lst_p_c==min_p_c)[0][0]
+            return lst_p[p_win]
+    else:
+        return 0
 
 @njit
 def get_player_state(e_state):
@@ -156,17 +65,22 @@ def get_player_state(e_state):
     p_state = e_state.copy()
     if p_idx != 1:
         x_ = p_idx - 1
-        p_state[:100][np.where(e_state[:100]==x_)[0]] = 4
-        p_state[:100][np.where(e_state[:100]==-x_)[0]] = -4
+        p_state[np.where(e_state[:100]==x_)[0]] = 4
+        p_state[np.where(e_state[:100]==-x_)[0]] = -4
         for i in range(4):
             x_ = (p_idx-1+i) % 4
             p_state[106+12*i:118+12*i] = e_state[106+12*x_:118+12*x_].copy()
             x_ = i+1
             y_ = (i+2-p_idx) % 4
             if x_ != (p_idx-1):
-                p_state[:100][np.where(e_state[:100]==x_)[0]] = y_
-                p_state[:100][np.where(e_state[:100]==-x_)[0]] = -y_
+                p_state[np.where(e_state[:100]==x_)[0]] = y_
+                p_state[np.where(e_state[:100]==-x_)[0]] = -y_
     
+    if close_game(e_state) == 0:
+        p_state[154] = 0
+    else:
+        p_state[154] = 1
+
     return p_state
 
 @njit
@@ -210,7 +124,7 @@ def get_list_action(p_state):
             list_action += temp_
         elif s_taken == 1:
             s_ = np.where(taken==1)[0][0]
-            if b_stocks[:5][s_] >= 3: # Có thể lấy double
+            if b_stocks[s_] >= 3: # Có thể lấy double
                 list_action += temp_
             else:
                 if (s_+4) in temp_:
@@ -244,31 +158,9 @@ def get_list_action(p_state):
                 list_action.append(card_id+102)
     
     else: # Pha trả nguyên liệu
-        temp_ = [i_+192 for i_ in range(6) if self_st[i_] != 0]
-        list_action += temp_
+        list_action += [i_+192 for i_ in range(6) if self_st[i_] != 0]
 
     return list_action
-
-@njit
-def close_game(e_state):
-    score_arr = e_state[np.array([117,129,141,153])]
-    max_score = np.max(score_arr)
-    if max_score >= 15 and e_state[-1] == 0 and e_state[154] % 4 == 0:
-        lst_p = np.where(score_arr==max_score)[0] + 1
-        if len(lst_p) == 1:
-            return lst_p[0]
-        else:
-            lst_p_c = []
-            lst_p = np.flip(lst_p)
-            for p_id in lst_p:
-                lst_p_c.append(np.count_nonzero(e_state[:90]==p_id))
-            
-            lst_p_c = np.array(lst_p_c)
-            min_p_c = np.min(lst_p_c)
-            p_win = np.where(lst_p_c==min_p_c)[0][0]
-            return lst_p[p_win]
-    else:
-        return 0
 
 @njit
 def step(action, e_state, lv1, lv2, lv3):
@@ -303,16 +195,16 @@ def step(action, e_state, lv1, lv2, lv3):
                 st_ = action - 4
                 taken = e_state[155:160]
                 taken[st_] += 1 # Thêm vào nguyên liệu đã lấy
-                cur_p[:5][st_] += 1 # Thêm nguyên liệu cho người chơi hiện tại
-                b_stocks[:5][st_] -= 1 # Trừ nguyên liệu ở bàn chơi
+                cur_p[st_] += 1 # Thêm nguyên liệu cho người chơi hiện tại
+                b_stocks[st_] -= 1 # Trừ nguyên liệu ở bàn chơi
                 # Tính toán xem pha lấy nguyên liệu còn tiếp tục hay không
                 # Chuyển sang pha trả nguyên liệu hoặc sang turn mới
                 s_taken = np.sum(taken)
                 if s_taken == 1: # Chỉ còn đúng loại nl vừa lấy nhưng sl < 3
-                    if b_stocks[:5][st_] < 3 and (np.sum(b_stocks[:5]) - b_stocks[:5][st_]) == 0:
+                    if b_stocks[st_] < 3 and (np.sum(b_stocks[:5]) - b_stocks[st_]) == 0:
                         check_phase1 = True
                 elif s_taken == 2: # Lấy double, hoặc không còn nl nào khác 2 cái vừa lấy
-                    if np.max(taken) == 2 or (np.sum(b_stocks[:5]) - np.sum(b_stocks[:5][np.where(taken>0)[0]])) == 0:
+                    if np.max(taken) == 2 or (np.sum(b_stocks[:5]) - np.sum(b_stocks[np.where(taken>0)[0]])) == 0:
                         check_phase1 = True
                 else: # sum(taken) = 3
                     check_phase1 = True
@@ -327,31 +219,31 @@ def step(action, e_state, lv1, lv2, lv3):
         elif phase == 2: # Pha úp thẻ, thẻ = action - 9, đặc biệt 90,91,92
             card_id = action - 9
             if b_stocks[5] > 0: # Check nhận nguyên liệu vàng
-                cur_p[:6][5] += 1 # Cộng nguyên liệu vàng cho người chơi
+                cur_p[5] += 1 # Cộng nguyên liệu vàng cho người chơi
                 b_stocks[5] -= 1 # Trừ nguyên liệu vàng ở bàn chơi
 
             if card_id == 90: # Úp thẻ ẩn cấp 1
-                e_state[:90][lv1[lv1[-1]]] = -(p_idx+1)
+                e_state[lv1[lv1[-1]]] = -(p_idx+1)
                 lv1[-1] += 1
             elif card_id == 91: # Úp thẻ ẩn cấp 2
-                e_state[:90][lv2[lv2[-1]]] = -(p_idx+1)
+                e_state[lv2[lv2[-1]]] = -(p_idx+1)
                 lv2[-1] += 1
             elif card_id == 92: # Úp thẻ ẩn cấp 3
-                e_state[:90][lv3[lv3[-1]]] = -(p_idx+1)
+                e_state[lv3[lv3[-1]]] = -(p_idx+1)
                 lv3[-1] += 1
             else: # Úp thẻ bình thường
-                e_state[:90][card_id] = -(p_idx+1)
+                e_state[card_id] = -(p_idx+1)
                 if card_id < 40:
                     if lv1[-1] < 40:
-                        e_state[:90][lv1[lv1[-1]]] = 5
+                        e_state[lv1[lv1[-1]]] = 5
                         lv1[-1] += 1
                 elif card_id < 70:
                     if lv2[-1] < 30:
-                        e_state[:90][lv2[lv2[-1]]] = 5
+                        e_state[lv2[lv2[-1]]] = 5
                         lv2[-1] += 1
                 else:
                     if lv3[-1] < 20:
-                        e_state[:90][lv3[lv3[-1]]] = 5
+                        e_state[lv3[lv3[-1]]] = 5
                         lv3[-1] += 1
             
             # Chuyển sang pha trả nguyên liệu hoặc sang turn mới
@@ -376,20 +268,20 @@ def step(action, e_state, lv1, lv2, lv3):
             b_stocks[5] += nl_auto
 
             # Nhận thẻ
-            x_ = e_state[:90][card_id]
-            e_state[:90][card_id] = p_idx+1
+            x_ = e_state[card_id]
+            e_state[card_id] = p_idx+1
             if x_ == 5:
                 if card_id < 40:
                     if lv1[-1] < 40:
-                        e_state[:90][lv1[lv1[-1]]] = 5
+                        e_state[lv1[lv1[-1]]] = 5
                         lv1[-1] += 1
                 elif card_id < 70:
                     if lv2[-1] < 30:
-                        e_state[:90][lv2[lv2[-1]]] = 5
+                        e_state[lv2[lv2[-1]]] = 5
                         lv2[-1] += 1
                 else:
                     if lv3[-1] < 20:
-                        e_state[:90][lv3[lv3[-1]]] = 5
+                        e_state[lv3[lv3[-1]]] = 5
                         lv3[-1] += 1
 
             # Score, const_stock
@@ -404,7 +296,7 @@ def step(action, e_state, lv1, lv2, lv3):
                     noble_lst.append(noble_id)
 
             for noble_id in noble_lst:
-                e_state[:100][noble_id] = p_idx+1
+                e_state[noble_id] = p_idx+1
                 cur_p[11] += 3
 
             e_state[154] += 1 # Sang turn mới
@@ -412,7 +304,7 @@ def step(action, e_state, lv1, lv2, lv3):
         
         elif phase == 4: # Pha trả nguyên liệu, nguyên liệu = action - 192
             st_ = action - 192
-            cur_p[:6][st_] -= 1
+            cur_p[st_] -= 1
             b_stocks[st_] += 1
 
             if np.sum(cur_p[:6]) <= 10: # Thỏa mãn điều kiện này thì sang turn mới
@@ -433,9 +325,11 @@ def amount_action():
 
 @njit
 def check_victory(p_state):
-    score_arr = p_state[np.array([117,129,141,153])]
-    max_score = np.max(score_arr)
-    if max_score >= 15 and p_state[-1] == 0 and p_state[154] % 4 == 0:
+    if p_state[154] == 0:
+        return -1
+    else:
+        score_arr = p_state[np.array([117,129,141,153])]
+        max_score = np.max(score_arr)
         lst_p = np.where(score_arr==max_score)[0] + 1
         if len(lst_p) == 1:
             if lst_p[0] == 1:
@@ -455,5 +349,3 @@ def check_victory(p_state):
                 return 1
             else:
                 return 0
-    else:
-        return -1

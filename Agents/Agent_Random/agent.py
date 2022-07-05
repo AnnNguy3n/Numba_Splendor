@@ -1,4 +1,4 @@
-from Agents.agent_functions import *
+from Agents.agent_func import *
 import numpy as np
 
 def action(p_state, temp_file, pernament_file):

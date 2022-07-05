@@ -2,8 +2,6 @@ from Environment.environment_functions import *
 import random as rd
 from time import time
 
-from Agents.Agent_Random.Agent_Random import Agent_Random as p1
-
 def one_game(list_player, env, lv1, lv2, lv3, print_mode, pernament_file):
     reset(env, lv1, lv2, lv3)
 
@@ -91,6 +89,8 @@ def n_games(list_player, num_games=1, print_mode=False, pernament_file = []):
     return num_won, pernament_file
 
 if __name__ == '__main__':
+    from Agents.Agent_Random.agent import action as p1
+    
     a = time()
     print(n_games(list_player=[p1,p1,p1,p1], num_games=1, print_mode=True, pernament_file=[])[0])
     print(time() - a)

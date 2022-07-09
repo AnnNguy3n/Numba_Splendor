@@ -76,11 +76,7 @@ def get_player_state(e_state):
                 p_state[np.where(e_state[:100]==x_)[0]] = y_
                 p_state[np.where(e_state[:100]==-x_)[0]] = -y_
     
-    if close_game(e_state) == 0:
-        p_state[154] = 0
-    else:
-        p_state[154] = 1
-
+    p_state[154] = 0
     return p_state
 
 @njit

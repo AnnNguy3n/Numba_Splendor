@@ -72,6 +72,10 @@ def in_ban_choi(p_state):
     print('BOT2:', [i_ for i_ in range(90) if p_state[i_] == 3])
     print('BOT3:', [i_ for i_ in range(90) if p_state[i_] == 4])
 
+    print()
+    print('Điểm theo thứ tự:', p_state[117], p_state[129], p_state[141], p_state[153])
+    print()
+
 def in_hanh_dong(p_state):
     list_action = get_list_action(p_state)
     phase = p_state[160]

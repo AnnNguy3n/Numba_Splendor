@@ -96,7 +96,7 @@ def in_hanh_dong(p_state):
         temp_lst = ['Đỏ', 'Lam', 'Lục', 'Đen', 'Trắng']
         for i in list_action:
             if i == 0:
-                print('Kết thúc lấy nguyên liệu')
+                print(str(i) + '. ' + 'Kết thúc lấy nguyên liệu')
             else:
                 print(str(i) + '. Lấy ' + temp_lst[i-4])
     

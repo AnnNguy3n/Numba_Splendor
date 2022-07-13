@@ -84,6 +84,12 @@ def in_hanh_dong(p_state):
         temp_lst = ['Kết thúc lượt', 'Lấy nguyên liệu', 'Úp thẻ', 'Mua thẻ']
         for i in list_action:
             print(str(i) + '. ' + temp_lst[i])
+        
+        if 3 in list_action:
+            temp_state = p_state.copy()
+            temp_state[160] = 3
+            temp_lst_act = get_list_action(temp_state)
+            print('List thẻ mua được:', temp_lst_act)
     
     elif phase == 1:
         print('Lấy nguyên liệu:')

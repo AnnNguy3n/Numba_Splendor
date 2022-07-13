@@ -6,6 +6,7 @@ def one_game(list_player, env, lv1, lv2, lv3, print_mode, per_file):
     reset(env, lv1, lv2, lv3)
 
     def _print_():
+        return
         print('----------------------------------------------------------------------------------------------------')
         print('Thẻ 1:', [i_ for i_ in range(40) if env[:40][i_] == 5], 'Thẻ 2:', [i_ for i_ in range(40,70) if env[:70][i_] == 5], 'Thẻ 3:', [i_ for i_ in range(70,90) if env[:90][i_] == 5], 'Thẻ noble:', [i_ for i_ in range(90,100) if env[:100][i_] == 5])
         print('B_stocks:', env[100:106], 'P1:', env[106:118], 'P2:', env[118:130], 'P3:', env[130:142], 'P4:', env[142:154])
@@ -25,12 +26,16 @@ def one_game(list_player, env, lv1, lv2, lv3, print_mode, per_file):
         act, temp_file[p_idx], per_file = list_player[p_idx](get_player_state(env, lv1, lv2, lv3), temp_file[p_idx], per_file)
         step(act, env, lv1, lv2, lv3)
         if print_mode:
+            temp_lst = ['Đỏ', 'Lam', 'Lục', 'Đen', 'Trắng']
+            temp_lst_1 = ['Kết thúc lượt', 'Lấy nguyên liệu', 'Úp thẻ', 'Mua thẻ']
             if act == 0:
+                print('----------------------------------------------------------------------------------------------------')
                 print('Action kết thúc lượt:', act)
             elif act in range(1,4):
-                print('Action chọn pha:', act)
+                print('----------------------------------------------------------------------------------------------------')
+                print('Action chọn pha:', temp_lst_1[act])
             elif act in range(4,9):
-                print('Action chọn lấy nguyên liệu:', act-4)
+                print('Action chọn lấy nguyên liệu:', temp_lst[act-4])
             elif act in range(9,99):
                 print('Action chọn úp thẻ:', act-9)
             elif act in range(99, 102):
@@ -38,7 +43,7 @@ def one_game(list_player, env, lv1, lv2, lv3, print_mode, per_file):
             elif act in range(102, 192):
                 print('Action chọn mua thẻ:', act-102)
             else:
-                print('Action chọn trả nguyên liệu:', act-192)
+                print('Action chọn trả nguyên liệu:', temp_lst[act-192])
 
             _print_()
 
@@ -92,3 +97,9 @@ def n_games(list_player, num_game=1, print_mode=False, per_file=[]):
             num_won[4] += 1
 
     return num_won, per_file
+
+
+if __name__ == '__main__':
+    from Agents.Agent_Random.agent import action as p1
+    from Agents.Human.agent import action as player
+    n_games([player,p1,p1,p1], num_game=1, print_mode=True, per_file=[])

@@ -24,15 +24,17 @@ def one_game(list_player, env, lv1, lv2, lv3, print_mode, per_file):
     while env[154] <= 400 and _cc <= 10000:
         p_idx = env[154]%4
         act, temp_file[p_idx], per_file = list_player[p_idx](get_player_state(env, lv1, lv2, lv3), temp_file[p_idx], per_file)
+        if env[160] == 0:
+            print('----------------------------------------------------------------------------------------------------')
         step(act, env, lv1, lv2, lv3)
         if print_mode:
             temp_lst = ['Đỏ', 'Lam', 'Lục', 'Đen', 'Trắng']
             temp_lst_1 = ['Kết thúc lượt', 'Lấy nguyên liệu', 'Úp thẻ', 'Mua thẻ']
             if act == 0:
-                print('----------------------------------------------------------------------------------------------------')
+                # print('----------------------------------------------------------------------------------------------------')
                 print('Action kết thúc lượt:', act)
             elif act in range(1,4):
-                print('----------------------------------------------------------------------------------------------------')
+                # print('----------------------------------------------------------------------------------------------------')
                 print('Action chọn pha:', temp_lst_1[act])
             elif act in range(4,9):
                 print('Action chọn lấy nguyên liệu:', temp_lst[act-4])
@@ -100,6 +102,6 @@ def n_games(list_player, num_game=1, print_mode=False, per_file=[]):
 
 
 if __name__ == '__main__':
-    from Agents.Agent_Random.agent import action as p1
+    from Agents.Agent_Chi_policy.agent import action as Chi
     from Agents.Human.agent import action as player
-    n_games([player,p1,p1,p1], num_game=1, print_mode=True, per_file=[])
+    n_games([player,Chi,Chi,Chi], num_game=1, print_mode=True, per_file=[])

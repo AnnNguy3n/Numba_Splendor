@@ -95,7 +95,10 @@ def in_hanh_dong(p_state):
         print('Lấy nguyên liệu:')
         temp_lst = ['Đỏ', 'Lam', 'Lục', 'Đen', 'Trắng']
         for i in list_action:
-            print(str(i) + '. Lấy ' + temp_lst[i-4])
+            if i == 0:
+                print('Kết thúc lấy nguyên liệu')
+            else:
+                print(str(i) + '. Lấy ' + temp_lst[i-4])
     
     elif phase == 2:
         print('Úp thẻ:')

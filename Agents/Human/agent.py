@@ -3,7 +3,7 @@ import numpy as np
 from Environment.env_func import noble_cards_infor, normal_cards_infor
 
 def in_ban_choi(p_state):
-    print('----------------------------------------------------------------------------------------------------')
+    # print('----------------------------------------------------------------------------------------------------')
     # print('Thứ tự nguyên liệu được in là: Đỏ, Lam, Lục, Đen, Trắng, Vàng')
     temp_lst = ['Đỏ', 'Lam', 'Lục', 'Đen', 'Trắng', 'Vàng']
     print('Các thẻ trên bàn chơi:')
@@ -41,29 +41,29 @@ def in_ban_choi(p_state):
 
     print()
     print('Nguyên liệu và nguyên liệu vĩnh cửu:')
-    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('', 'Đỏ', 'Lam', 'Lục', 'Đen', 'Trắng', 'Vàng'))
+    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('' ,'', 'Đỏ', 'Lam', 'Lục', 'Đen', 'Trắng', 'Vàng'))
     _ = p_state[100:106]
-    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('Board', _[0], _[1], _[2], _[3], _[4], _[5]))
+    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('' ,'Board', _[0], _[1], _[2], _[3], _[4], _[5]))
 
     _ = p_state[106:112]
-    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('Self', _[0], _[1], _[2], _[3], _[4], _[5]))
+    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('' ,'Self', _[0], _[1], _[2], _[3], _[4], _[5]))
     _ = p_state[112:117]
-    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('Self_C', _[0], _[1], _[2], _[3], _[4], 0))
+    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('' ,'Self_C', _[0], _[1], _[2], _[3], _[4], 0))
 
     _ = p_state[118:124]
-    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('BOT1', _[0], _[1], _[2], _[3], _[4], _[5]))
+    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('' ,'BOT1', _[0], _[1], _[2], _[3], _[4], _[5]))
     _ = p_state[124:129]
-    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('BOT1_C', _[0], _[1], _[2], _[3], _[4], 0))
+    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('' ,'BOT1_C', _[0], _[1], _[2], _[3], _[4], 0))
 
     _ = p_state[130:136]
-    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('BOT2', _[0], _[1], _[2], _[3], _[4], _[5]))
+    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('' ,'BOT2', _[0], _[1], _[2], _[3], _[4], _[5]))
     _ = p_state[136:141]
-    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('BOT2_C', _[0], _[1], _[2], _[3], _[4], 0))
+    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('' ,'BOT2_C', _[0], _[1], _[2], _[3], _[4], 0))
 
     _ = p_state[142:148]
-    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('BOT3', _[0], _[1], _[2], _[3], _[4], _[5]))
+    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('' ,'BOT3', _[0], _[1], _[2], _[3], _[4], _[5]))
     _ = p_state[148:153]
-    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('BOT3_C', _[0], _[1], _[2], _[3], _[4], 0))
+    print('    {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7} {: >7}'.format('' ,'BOT3_C', _[0], _[1], _[2], _[3], _[4], 0))
     
     print()
     print('Thẻ đang sở hữu:')
@@ -109,5 +109,17 @@ def in_hanh_dong(p_state):
 def action(p_state, temp_file, per_file):
     in_ban_choi(p_state)
     in_hanh_dong(p_state)
-    act = int(input('\nNhập action được chọn: '))
-    return act, temp_file, per_file
+    list_action = get_list_action(p_state)
+    act = input('\nNhập action được chọn: ')
+    check_valid = False
+    while not check_valid:
+        try:
+            act = int(act)
+            if act in list_action:
+                check_valid = True
+            else:
+                act = input('\nNhập sai, mời nhập lại! Nhập action được chọn: ')
+        except:
+            act = input('\nNhập sai, mời nhập lại! Nhập action được chọn: ')
+    
+    return int(act), temp_file, per_file

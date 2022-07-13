@@ -104,4 +104,4 @@ def n_games(list_player, num_game=1, print_mode=False, per_file=[]):
 if __name__ == '__main__':
     from Agents.Agent_Chi_policy.agent import action as Chi
     from Agents.Human.agent import action as player
-    print(n_games([player,Chi,Chi,Chi], num_game=1, print_mode=True, per_file=[]))
+    print(n_games([player,Chi,Chi,Chi], num_game=1, print_mode=True, per_file=[])[0])

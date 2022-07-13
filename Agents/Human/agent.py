@@ -117,7 +117,7 @@ def in_hanh_dong(p_state):
         print('Trả nguyên liệu:')
         temp_lst = ['Đỏ', 'Lam', 'Lục', 'Đen', 'Trắng']
         for i in list_action:
-            print(str(i) + '. Lấy ' + temp_lst[i-192])
+            print(str(i) + '. Trả ' + temp_lst[i-192])
 
 def action(p_state, temp_file, per_file):
     in_ban_choi(p_state)

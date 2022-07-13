@@ -89,7 +89,7 @@ def in_hanh_dong(p_state):
             temp_state = p_state.copy()
             temp_state[160] = 3
             temp_lst_act = get_list_action(temp_state)
-            print('List thẻ mua được:', temp_lst_act)
+            print('List thẻ mua được:', np.array(temp_lst_act)-102)
     
     elif phase == 1:
         print('Lấy nguyên liệu:')

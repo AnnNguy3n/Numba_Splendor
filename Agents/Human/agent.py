@@ -115,7 +115,7 @@ def in_hanh_dong(p_state):
     
     else: # phase == 4
         print('Trả nguyên liệu:')
-        temp_lst = ['Đỏ', 'Lam', 'Lục', 'Đen', 'Trắng']
+        temp_lst = ['Đỏ', 'Lam', 'Lục', 'Đen', 'Trắng', 'Vàng']
         for i in list_action:
             print(str(i) + '. Trả ' + temp_lst[i-192])
 

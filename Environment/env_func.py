@@ -39,8 +39,6 @@ def reset(e_state, lv1, lv2, lv3):
 
 @njit
 def get_player_state(e_state, lv1, lv2, lv3):
-    # Tình trạng các thẻ: 1,2,3,4, 0: không quan sát thấy
-    # 5: trên bàn chưa ai lấy, -1: bản thân đang úp
     p_idx = e_state[154] % 4
     p_state = e_state.copy()
     if p_idx != 0:
@@ -75,14 +73,25 @@ def close_game(e_state):
             return lst_p[0]
         else:
             lst_p_c = []
-            lst_p = np.flip(lst_p)
             for p_id in lst_p:
                 lst_p_c.append(np.count_nonzero(e_state[:90]==p_id))
             
             lst_p_c = np.array(lst_p_c)
             min_p_c = np.min(lst_p_c)
-            p_win = np.where(lst_p_c==min_p_c)[0][0]
-            return lst_p[p_win]
+            lst_p_win = np.where(lst_p_c==min_p_c)[0]
+            if len(lst_p_win) == 1:
+                return lst_p[lst_p_win[0]]
+            else:
+                id_max = -1
+                a = -1
+                for i in lst_p_win:
+                    b = max(np.where(e_state[:90]==lst_p[i])[0])
+                    if b > a:
+                        id_max = lst_p[i]
+                        a = b
+
+                return id_max
+    
     else:
         return 0
 
@@ -167,7 +176,6 @@ def get_list_action(p_state):
 
 @njit
 def step(action, e_state, lv1, lv2, lv3):
-    # Check xem action có hợp lệ
     list_action = get_list_action(get_player_state(e_state, lv1, lv2, lv3))
     if action not in list_action:
         '''
@@ -218,7 +226,7 @@ def step(action, e_state, lv1, lv2, lv3):
                     e_state[160] = 0
                 
                 e_state[155:160] = [0,0,0,0,0]
-        
+
         elif phase == 2: # Pha úp thẻ, thẻ = action - 9, đặc biệt 90,91,92
             card_id = action - 9
             if b_stocks[5] > 0: # Check nhận nguyên liệu vàng
@@ -240,7 +248,7 @@ def step(action, e_state, lv1, lv2, lv3):
                     if lv1[-1] < 40:
                         e_state[lv1[lv1[-1]]] = 5
                         lv1[-1] += 1
-                elif card_id < 70:
+                elif card_id >= 40 and card_id < 70:
                     if lv2[-1] < 30:
                         e_state[lv2[lv2[-1]]] = 5
                         lv2[-1] += 1
@@ -248,7 +256,7 @@ def step(action, e_state, lv1, lv2, lv3):
                     if lv3[-1] < 20:
                         e_state[lv3[lv3[-1]]] = 5
                         lv3[-1] += 1
-            
+
             # Chuyển sang pha trả nguyên liệu hoặc sang turn mới
             if np.sum(cur_p[:6]) > 10:
                 e_state[160] = 4 # Sang pha trả nguyên liệu
@@ -278,7 +286,7 @@ def step(action, e_state, lv1, lv2, lv3):
                     if lv1[-1] < 40:
                         e_state[lv1[lv1[-1]]] = 5
                         lv1[-1] += 1
-                elif card_id < 70:
+                elif card_id >= 40 and card_id < 70:
                     if lv2[-1] < 30:
                         e_state[lv2[lv2[-1]]] = 5
                         lv2[-1] += 1
@@ -301,10 +309,10 @@ def step(action, e_state, lv1, lv2, lv3):
             for noble_id in noble_lst:
                 e_state[noble_id] = p_idx+1
                 cur_p[11] += 3
-
+            
             e_state[154] += 1 # Sang turn mới
             e_state[160] = 0
-        
+                
         else: # Pha trả nguyên liệu, nguyên liệu = action - 192
             st_ = action - 192
             cur_p[st_] -= 1
@@ -324,23 +332,37 @@ def check_victory(p_state):
     max_score = np.max(score_arr)
     if max_score < 15 or p_state[160] != 0:
         return -1
-
+    
     lst_p = np.where(score_arr==max_score)[0] + 1
     if len(lst_p) == 1:
         if lst_p[0] == 1:
             return 1
         else:
             return 0
+    
     else:
         lst_p_c = []
-        lst_p = np.flip(lst_p)
         for p_id in lst_p:
             lst_p_c.append(np.count_nonzero(p_state[:90]==p_id))
         
         lst_p_c = np.array(lst_p_c)
         min_p_c = np.min(lst_p_c)
-        p_win = np.where(lst_p_c==min_p_c)[0][0]
-        if lst_p[p_win] == 1:
-            return 1
+        lst_p_win = np.where(lst_p_c==min_p_c)[0]
+        if len(lst_p_win) == 1:
+            if lst_p[lst_p_win[0]] == 1:
+                return 1
+            else:
+                return 0
         else:
-            return 0
+            id_max = -1
+            a = -1
+            for i in lst_p_win:
+                b = max(np.where(p_state[:90]==lst_p[i])[0])
+                if b > a:
+                    id_max = lst_p[i]
+                    a = b
+            
+            if id_max == 1:
+                return 1
+            else:
+                return 0

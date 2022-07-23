@@ -55,7 +55,7 @@ def one_game(list_player, env, lv1, lv2, lv3, print_mode, per_file):
     turn = env[154]
     for i in range(4):
         env[154] = i
-        act, temp_file[p_idx], per_file = list_player[p_idx](get_player_state(env, lv1, lv2, lv3), temp_file[p_idx], per_file)
+        act, temp_file[i], per_file = list_player[i](get_player_state(env, lv1, lv2, lv3), temp_file[i], per_file)
     
     env[154] = turn
     return close_game(env), per_file
